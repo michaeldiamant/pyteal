@@ -124,6 +124,9 @@ from .scratch import ScratchSlot, ScratchLoad, ScratchStore, ScratchStackStore
 from .scratchvar import ScratchVar
 from .maybe import MaybeValue
 
+# abi
+from . import abi
+
 __all__ = [
     "Expr",
     "LeafExpr",
@@ -254,4 +257,5 @@ __all__ = [
     "For",
     "Break",
     "Continue",
+    "abi",
 ]
