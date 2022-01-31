@@ -5,6 +5,7 @@ from ... import *
 options = CompileOptions(version=5)
 
 
+"""
 def test_method_return_subroutine_log():
     @Subroutine(TealType.bytes, "ork()byte[13]")
     def ork() -> Expr:
@@ -39,3 +40,4 @@ def test_method_return_subroutine_wrong_type():
 
     with pytest.raises(TealCompileError):
         abi.MethodReturn(fakeUint64()).__teal__(options=options)
+"""
