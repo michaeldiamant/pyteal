@@ -1,14 +1,13 @@
 from typing import TYPE_CHECKING
 
-from pyteal.ast.return_ import Return
-from pyteal.ast.seq import Seq
-
+from ..return_ import Return
+from ..seq import Seq
 from ..naryexpr import Concat
 from ..unaryexpr import Log
 from ...errors import TealCompileError, TealInputError, verifyTealVersion
-from ...ir.ops import Op
 from ...types import TealType, types_match
 from ...config import RETURN_EVENT_SELECTOR
+from ...ir import TealBlock, TealOp, Op
 from ..expr import Expr
 from .type import Type
 
@@ -53,7 +52,7 @@ class MethodReturn(Expr):
                 )
 
         if self.value is None:
-            return Return().__teal__(options)
+            return TealBlock.FromOp(options, TealOp(self, Op.retsub))
         else:
             return Seq(
                 Log(Concat(RETURN_EVENT_SELECTOR, self.value.encode())), Return()
