@@ -1,7 +1,6 @@
 from typing import TYPE_CHECKING
 
 from .type import Type
-from ..seq import Seq
 from ..naryexpr import Concat
 from ..unaryexpr import Log
 from ...errors import verifyTealVersion
