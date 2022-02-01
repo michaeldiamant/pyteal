@@ -15,14 +15,11 @@ if TYPE_CHECKING:
 
 
 class MethodReturn(Expr):
-    def __init__(self, value: Type = None) -> None:
+    def __init__(self, value: Type) -> None:
         super().__init__()
         self.value = value
 
     def __teal__(self, options: "CompileOptions"):
-        if self.value is None:
-            return Seq().__teal__(options=options)
-
         verifyTealVersion(
             Op.log.min_version, options.version, "TEAL version too low to use log"
         )
