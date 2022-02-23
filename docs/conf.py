@@ -19,7 +19,7 @@ sys.path.insert(0, os.path.abspath(".."))
 # -- Project information -----------------------------------------------------
 
 project = "PyTeal"
-copyright = "2021, Algorand"
+copyright = "2022, Algorand"
 author = "Algorand"
 
 
@@ -28,9 +28,9 @@ author = "Algorand"
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-# extensions = ['m2r']
+# extensions = ['m2r2']
 extensions = ["sphinx.ext.autodoc", "sphinx.ext.napoleon"]
-source_suffix = [".rst", ".md"]
+source_suffix = [".rst"]
 master_doc = "index"
 
 napoleon_include_init_with_doc = True
