@@ -201,7 +201,7 @@ if not OLD_CODE_ONLY:
             ScratchVar(TealType.uint64),
         ]
 
-        def store_initial_values() -> list[Expr]:
+        def store_initial_values():
             return [s.store(Int(i + 1)) for i, s in enumerate(xs)]
 
         d = DynamicScratchVar(TealType.uint64)
