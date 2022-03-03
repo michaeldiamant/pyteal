@@ -210,7 +210,7 @@ if not OLD_CODE_ONLY:
         def retrieve_and_increment(s: ScratchVar):
             return Seq(d.set_index(s), d.store(d.load() + Int(1)))
 
-        def asserts() -> list[Expr]:
+        def asserts():
             return [Assert(x.load() == Int(i + 1)) for i, x in enumerate(xs)]
 
         return Seq(
