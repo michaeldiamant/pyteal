@@ -195,6 +195,31 @@ if not OLD_CODE_ONLY:
             Int(1),
         )
 
+    def should_it_work() -> Expr:
+        xs = [
+            ScratchVar(TealType.uint64),
+            ScratchVar(TealType.uint64),
+        ]
+
+        def store_initial_values() -> list[Expr]:
+            return [s.store(Int(i + 1)) for i, s in enumerate(xs)]
+
+        d = DynamicScratchVar(TealType.uint64)
+
+        # @Subroutine(TealType.none)
+        def retrieve_and_increment(s: ScratchVar):
+            return Seq(d.set_index(s), d.store(d.load() + Int(1)))
+
+        def asserts() -> list[Expr]:
+            return [Assert(x.load() == Int(i + 1)) for i, x in enumerate(xs)]
+
+        return Seq(
+            Seq(store_initial_values()),
+            Seq([retrieve_and_increment(x) for x in xs]),
+            Seq(asserts()),
+            Int(1),
+        )
+
 
 OLD_CASES = (sub_logcat, sub_slowfib, sub_fastfib, sub_even)
 
@@ -223,6 +248,9 @@ if not OLD_CODE_ONLY:
 
     def test_api_docs_dynamic_scratch_var_demo():
         compile_and_save(api_docs_dynamic_scratch_var_demo)
+
+    def test_should_it_work():
+        compile_and_save(should_it_work)
 
     def test_new():
         for pt in NEW_CASES:
