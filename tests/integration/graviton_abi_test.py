@@ -127,22 +127,23 @@ def int65_mult(x: Int65, y: Int65, *, output: Int65):
     A better appraoch would stick to `Uint64` as the base type and use 2's complement arithmetic.
     """
     # TODO: can we get something like the following one-liner working?
-    # return output.set(pt.Not(x[0].get() ^ y[0].get()), x[1].get() * y[1].get())
-    x0 = pt.abi.Bool()
-    x1 = pt.abi.Uint64()
-    y0 = pt.abi.Bool()
-    y1 = pt.abi.Uint64()
-    z0 = pt.abi.Bool()
-    z1 = pt.abi.Uint64()
-    return pt.Seq(
-        x0.set(x[0]),
-        x1.set(x[1]),
-        y0.set(y[0]),
-        y1.set(y[1]),
-        z0.set(pt.Not(x0.get() ^ y0.get())),
-        z1.set(x1.get() * y1.get()),
-        output.set(z0, z1),
-    )
+
+    return output.set(pt.Not(x[0].as_new() ^ y[0].as_new()), x[1].as_new() * y[1].as_new())
+    # x0 = pt.abi.Bool()
+    # x1 = pt.abi.Uint64()
+    # y0 = pt.abi.Bool()
+    # y1 = pt.abi.Uint64()
+    # z0 = pt.abi.Bool()
+    # z1 = pt.abi.Uint64()
+    # return pt.Seq(
+    #     x0.set(x[0]),
+    #     x1.set(x[1]),
+    #     y0.set(y[0]),
+    #     y1.set(y[1]),
+    #     z0.set(pt.Not(x0.get() ^ y0.get())),
+    #     z1.set(x1.get() * y1.get()),
+    #     output.set(z0, z1),
+    # )
 
 
 @Blackbox(input_types=[None])
